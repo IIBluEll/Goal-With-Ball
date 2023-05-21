@@ -9,6 +9,7 @@ public class InGameSystem : MonoBehaviour
     private Level_MGr levelData;
     
     [SerializeField] private Ball_Mgr playerBall;
+    [SerializeField] private Camera mainCamera;
 
     [SerializeField] private int life;
     [SerializeField] private int nowLevel;
@@ -16,6 +17,7 @@ public class InGameSystem : MonoBehaviour
 
     [SerializeField] private bool isPlayerDied = false;
     public event Action BallDie;
+    public event Action ChangeLife;
 
     public int Life
     {
@@ -33,6 +35,7 @@ public class InGameSystem : MonoBehaviour
             }
             else
             {
+                ChangeLife?.Invoke();
                 Debug.Log($"벽이랑 충돌! 목숨 {Life} 남음");
             }
         }
@@ -48,8 +51,17 @@ public class InGameSystem : MonoBehaviour
         
         Destroy(levelData.gameObject);
 
-        playerBall.CollToWall += DecreaseLife;
+        InitPosition(nowLevel);
     }
 
-    private void DecreaseLife() => Life -= 1;
+    private void InitPosition(int nowLevel)
+    {
+        var whereToGo = GameObject.Find("Level " + nowLevel).transform.position;
+        var cameraPos = new Vector3(whereToGo.x, whereToGo.y, -10);
+        
+        playerBall.transform.position = whereToGo;
+        mainCamera.transform.position = cameraPos;
+    }
+
+    public void DecreaseLife() => Life -= 1;
 }

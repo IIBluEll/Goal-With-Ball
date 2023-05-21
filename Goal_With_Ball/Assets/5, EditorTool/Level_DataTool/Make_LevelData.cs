@@ -22,7 +22,7 @@ public class Make_LevelData : MonoBehaviour
             Level_Datas data = ScriptableObject.CreateInstance<Level_Datas>();
 
             data.levelNumber = i;
-            data.life = (i - 1) / 10 + 1;
+            data.life = (i - 1) / 10 + 2;
             data.levelName = $"Level {i}";
 
             AssetDatabase.CreateAsset(data, "Assets/3. Datas/LevelData/" + i + " Level" + ".asset");

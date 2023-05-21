@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Ball_Mgr : MonoBehaviour
 {
-    public event Action CollToWall;
-
     private void Start()
     {
         InGameSystem.instance.BallDie += PlayerBallDie;
@@ -20,7 +18,13 @@ public class Ball_Mgr : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Wall"))
             return;
-        
-        CollToWall?.Invoke();
+
+        InGameSystem.instance.DecreaseLife();
+    }
+
+    private void OnDisable()
+    {
+        InGameSystem.instance.BallDie -= PlayerBallDie;
+
     }
 }

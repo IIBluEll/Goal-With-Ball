@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 24 Level
   m_EditorClassIdentifier: 
   levelNumber: 24
-  life: 3
+  life: 4
   levelName: Level 24
