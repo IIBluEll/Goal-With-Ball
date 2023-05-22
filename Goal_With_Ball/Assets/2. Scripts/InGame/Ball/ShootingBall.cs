@@ -4,34 +4,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
+using UnityEngine.EventSystems;
 
 public class ShootingBall : MonoBehaviour
 {
-    [SerializeField] private float forceMag = 10f;
-    [SerializeField] private bool isMove = false;
-    
     private Rigidbody2D rb;
-
+    [SerializeField] private GameObject arrow;
+    
+    private Vector2 dragStartPosition;
+    private Vector2 dragEndPosition;
+    private Vector2 shootDirection;
+    
+    [SerializeField]private bool isDragging = false;
+    [SerializeField]private float shootForce = 5f;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         
-#if UNITY_EDITOR
+        this.UpdateAsObservable()
+            .Where(x => Input.GetMouseButtonDown(0))
+            .Subscribe(x => CheckClickBall(), ()=> Debug.Log("종료"));
         
         this.UpdateAsObservable()
-            .FirstOrDefault(x => isMove == false && Input.GetKeyDown(KeyCode.Space))
-            .Subscribe(x => ShootBall(), ()=> Debug.Log("종료"));
-#endif
+            .Where(x => isDragging && Input.GetMouseButtonUp(0))
+            .Subscribe(x => ShootBall());
     }
     
+    private void CheckClickBall()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        if (hit.collider != null && hit.collider.gameObject == gameObject)
+        {
+            arrow.SetActive(true);
+            isDragging = true;
+            dragStartPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
+    }
+
     private void ShootBall()
     {
-        isMove = true;
-
-        var angle = UnityEngine.Random.Range(0f, 360f);
-        var radian = angle * Mathf.Deg2Rad;
-        var forceDir = new Vector2(Mathf.Cos(radian), Mathf.Sign(radian));
-
-        rb.AddForce(forceDir * forceMag, ForceMode2D.Impulse);
+        arrow.SetActive(false);
+        isDragging = false;
+        dragEndPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        shootDirection = dragStartPosition - dragEndPosition;
+        rb.AddForce(shootDirection.normalized * shootForce, ForceMode2D.Impulse);
     }
 }
