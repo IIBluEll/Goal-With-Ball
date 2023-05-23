@@ -7,7 +7,8 @@ public class Level_Datas : ScriptableObject
 {
     public int levelNumber;
     public int life;
-
+    public float rotateSpeed;
+    
     public string levelName;
-
+    
 }

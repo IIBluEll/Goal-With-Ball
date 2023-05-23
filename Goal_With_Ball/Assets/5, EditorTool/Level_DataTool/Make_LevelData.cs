@@ -24,7 +24,7 @@ public class Make_LevelData : MonoBehaviour
             data.levelNumber = i;
             data.life = (i - 1) / 10 + 2;
             data.levelName = $"Level {i}";
-
+            data.rotateSpeed = 50 * data.life;
             AssetDatabase.CreateAsset(data, "Assets/3. Datas/LevelData/" + i + " Level" + ".asset");
         }
 

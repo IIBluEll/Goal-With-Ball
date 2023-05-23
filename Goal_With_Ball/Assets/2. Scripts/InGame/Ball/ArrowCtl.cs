@@ -7,11 +7,12 @@ public class ArrowCtl : MonoBehaviour
     private LineRenderer lineRenderer;
     public Transform ballTransform;
     public float arrowMaxLength = 2f;
+    public float arrowHeadSize = 0.2f;
 
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 2; // 라인의 점 개수를 2로 설정
+        lineRenderer.positionCount = 4; // 라인의 점 개수를 4로 설정
     }
     private void Update()
     {
@@ -30,6 +31,8 @@ public class ArrowCtl : MonoBehaviour
         // 라인의 시작점과 끝점 설정
         lineRenderer.SetPosition(0, arrowStartPosition);
         lineRenderer.SetPosition(1, expectedPosition);
+        
+        DrawArrowHead(arrowStartPosition, expectedPosition);
     }
 
     private Vector3 CalculateExpectedPosition(Vector3 arrowEndPosition)
@@ -41,5 +44,21 @@ public class ArrowCtl : MonoBehaviour
         Vector3 expectedPosition = ballTransform.position + normalizedDirection * (distance * 0.5f);
 
         return expectedPosition;
+    }
+    
+    private void DrawArrowHead(Vector3 startPoint, Vector3 endPoint)
+    {
+        // 화살표 머리의 길이 계산
+        float arrowHeadLength = arrowHeadSize * Vector3.Distance(startPoint, endPoint);
+
+        // 라인 렌더러의 마지막 두 점 설정 (화살표 머리 부분)
+        Vector3 arrowDirection = (endPoint - startPoint).normalized;
+        Vector3 arrowHeadStartPoint = endPoint - arrowDirection * arrowHeadLength;
+        Vector3 arrowHeadOrthogonal = new Vector3(-arrowDirection.y, arrowDirection.x, 0f) * arrowHeadSize * 0.5f;
+        Vector3 arrowHeadEndPoint1 = arrowHeadStartPoint + arrowHeadOrthogonal;
+        Vector3 arrowHeadEndPoint2 = arrowHeadStartPoint - arrowHeadOrthogonal;
+
+        lineRenderer.SetPosition(2, arrowHeadEndPoint1);
+        lineRenderer.SetPosition(3, arrowHeadEndPoint2);
     }
 }

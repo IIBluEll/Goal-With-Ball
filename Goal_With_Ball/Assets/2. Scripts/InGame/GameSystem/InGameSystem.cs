@@ -14,7 +14,8 @@ public class InGameSystem : MonoBehaviour
     [SerializeField] private int life;
     [SerializeField] private int nowLevel;
     [SerializeField] private string levelName;
-
+    [SerializeField] private float rotateSpeed;
+    
     [SerializeField] private bool isPlayerDied = false;
     public event Action BallDie;
     public event Action ChangeLife;
@@ -40,6 +41,9 @@ public class InGameSystem : MonoBehaviour
             }
         }
     }
+
+    public float RotateSpeed => rotateSpeed;
+
     private void OnEnable()
     {
         instance = this;
@@ -48,6 +52,7 @@ public class InGameSystem : MonoBehaviour
         life = levelData.Life;
         nowLevel = levelData.NowLevel;
         levelName = levelData.LevelName;
+        rotateSpeed = levelData.RotateSpeed;
         
         Destroy(levelData.gameObject);
 

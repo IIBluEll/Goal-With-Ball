@@ -752,8 +752,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b7d9fc0d6d64374181eafe7485edbfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMag: 5
-  isMove: 0
+  arrow: {fileID: 0}
+  isDragging: 0
+  shootForce: 5
 --- !u!1 &1463927073
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1743158195}
   - component: {fileID: 1743158196}
+  - component: {fileID: 1743158197}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -982,6 +984,19 @@ MonoBehaviour:
   nowLevel: 0
   levelName: 
   isPlayerDied: 0
+--- !u!114 &1743158197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743158193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c98e3fe34bbf74da3da6c41acfbf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfLevels: 30
 --- !u!1 &1883500580
 GameObject:
   m_ObjectHideFlags: 0

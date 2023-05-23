@@ -9,4 +9,6 @@ public class Level_MGr : MonoBehaviour
     public int Life => levelData.life;
     public string LevelName => levelData.levelName;
 
+    public float RotateSpeed => levelData.rotateSpeed;
+
 }

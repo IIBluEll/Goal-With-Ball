@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 30
   life: 4
+  rotateSpeed: 200
   levelName: Level 30
