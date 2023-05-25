@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 4 Level
   m_EditorClassIdentifier: 
   levelNumber: 4
-  life: 2
-  rotateSpeed: 100
+  life: 1
+  rotateSpeed: 150
   levelName: Level 4

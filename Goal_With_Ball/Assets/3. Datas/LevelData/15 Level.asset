@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 15 Level
   m_EditorClassIdentifier: 
   levelNumber: 15
-  life: 3
-  rotateSpeed: 150
+  life: 2
+  rotateSpeed: 200
   levelName: Level 15

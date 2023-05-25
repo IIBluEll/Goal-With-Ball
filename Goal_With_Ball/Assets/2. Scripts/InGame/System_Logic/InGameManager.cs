@@ -13,7 +13,9 @@ public class InGameManager : MonoBehaviour
 {
     [SerializeField] private LoadLevelManager loadLevel;
     [SerializeField] private BallColl_Ctl ballColl;
-    
+
+    [SerializeField] private List<GameObject> maps;
+
     [SerializeField] private int life;
     [SerializeField] private int nowLevel;
     [SerializeField] private string levelName;
@@ -71,6 +73,11 @@ public class InGameManager : MonoBehaviour
 
         loadLevel.throwLevelData -= InitDatas;
         Destroy(loadLevel.gameObject);
+    }
+
+    private void Start()
+    {
+        maps[nowLevel-1].SetActive(true);
     }
 
     private void DecreaseLife() => Life -= 1;
