@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a9e757eb0671f2f4cbd48aa8ff17f764
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Nanum OgBiCe
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6ba6c5711944b534da0fcefdb9a4527f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
