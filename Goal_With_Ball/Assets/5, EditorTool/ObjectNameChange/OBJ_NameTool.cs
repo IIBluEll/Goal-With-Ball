@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 public class OBJ_NameTool : ScriptableWizard
 {
     public string baseName = "Obj_"; // 기본 이름
@@ -54,3 +56,4 @@ public class OBJ_NameTool : ScriptableWizard
         }
     }
 }
+#endif

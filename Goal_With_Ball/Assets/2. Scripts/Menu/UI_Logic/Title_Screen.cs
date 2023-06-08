@@ -11,6 +11,8 @@ public class Title_Screen : MonoBehaviour
     [SerializeField] private GameObject settingPopUp;
     [SerializeField] private GameObject quitPopUp;
     [SerializeField] private GameObject alarmPopUp;
+    
+    [SerializeField] private GameObject titleUI;
 
     [SerializeField] private List<GameObject> clearIcon;
 
@@ -62,6 +64,11 @@ public class Title_Screen : MonoBehaviour
         }
         
         alarmPopUp.SetActive(true);
+    }
+
+    public void GoBack_Btn()
+    {
+        titleUI.SetActive(true);
     }
     
     

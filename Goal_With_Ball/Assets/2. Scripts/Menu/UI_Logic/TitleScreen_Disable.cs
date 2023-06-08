@@ -11,8 +11,6 @@ public class TitleScreen_Disable : MonoBehaviour
     [SerializeField] private float endScale = 1f;
 
     private RectTransform rectTr;
-
-
     
     private void OnEnable()
     {
@@ -22,6 +20,11 @@ public class TitleScreen_Disable : MonoBehaviour
     public void StartBtn()
     {
         StartCoroutine(DisableAnim());
+    }
+
+    public void EnableStart()
+    {
+        StartCoroutine(ActiveAnim());
     }
 
     private IEnumerator ActiveAnim()

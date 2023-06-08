@@ -43,6 +43,10 @@ public class SaveSystem : MonoBehaviour
         
         LoadGameData();
         SaveGameData();
+
+#if UNITY_ANDROID
+        Application.targetFrameRate = 120;
+#endif
     }
 
     public void LoadGameData()

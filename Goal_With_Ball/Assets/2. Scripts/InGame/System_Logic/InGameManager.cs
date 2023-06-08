@@ -11,6 +11,8 @@ using UnityEngine;
 /// </summary>
 public class InGameManager : MonoBehaviour
 {
+    public Level_Datas LevelData;
+    
     [SerializeField] private LoadLevelManager loadLevel;
     [SerializeField] private BallColl_Ctl ballColl;
 
@@ -66,6 +68,8 @@ public class InGameManager : MonoBehaviour
 
     private void InitDatas(Level_Datas levelDatas)
     {
+        LevelData = levelDatas;
+        
         Life = levelDatas.life;
         nowLevel = levelDatas.levelNumber;
         levelName = levelDatas.levelName;
