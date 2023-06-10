@@ -11,11 +11,12 @@ using UnityEngine;
 /// </summary>
 public class InGameManager : MonoBehaviour
 {
-    public Level_Datas LevelData;
+    //public Level_Datas LevelData;
     
     [SerializeField] private LoadLevelManager loadLevel;
     [SerializeField] private BallColl_Ctl ballColl;
-
+    [SerializeField] private InGameSFX inGameSFX;
+    
     [SerializeField] private List<GameObject> maps;
 
     [SerializeField] private int life;
@@ -25,6 +26,8 @@ public class InGameManager : MonoBehaviour
     
     [SerializeField] private bool isPlayerDied = false;
 
+    [SerializeField] private GameObject tutorialUI;
+    
     public event Action gameEnd;            // 게임이 끝났기 때문에 모든 기능 정지
     public event Action gameOver;           // 게임 오버 UI 이벤트
     public event Action BallGoal;           // 게임 승리 UI 이벤트
@@ -57,6 +60,8 @@ public class InGameManager : MonoBehaviour
     
     private void OnEnable()
     {
+        Debug.Log("InGameMgr OnEnable");
+        
         loadLevel = GameObject.Find("LevelLoad").GetComponent<LoadLevelManager>();
         
         loadLevel.throwLevelData += InitDatas;
@@ -64,11 +69,13 @@ public class InGameManager : MonoBehaviour
         ballColl.BallCollToGoal += IsBallGoal;
         ballColl.BallOut += BallOut;
         ballColl.CameraZoom += CameraZoomTime;
+        
+        SaveSystem.instance.LoadGameData();
     }
 
     private void InitDatas(Level_Datas levelDatas)
     {
-        LevelData = levelDatas;
+        //LevelData = levelDatas;
         
         Life = levelDatas.life;
         nowLevel = levelDatas.levelNumber;
@@ -79,12 +86,23 @@ public class InGameManager : MonoBehaviour
         Destroy(loadLevel.gameObject);
     }
 
+
     private void Start()
     {
         maps[nowLevel-1].SetActive(true);
+
+        if (nowLevel == 1 && SaveSystem.instance.saveData.isTutorialcheck == false)
+        {   // 튜토리얼 스킵이 False일때 튜토리얼이 뜸
+            tutorialUI.SetActive(true);
+        }
     }
 
-    private void DecreaseLife() => Life -= 1;
+    private void DecreaseLife()
+    {
+        Life -= 1;
+        inGameSFX.BallCollSFX();
+    }
+
     private void BallOut() => Life = -1;
     private void IsBallGoal()
     {

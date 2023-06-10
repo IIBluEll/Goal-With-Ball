@@ -14,6 +14,8 @@ public class SaveSystem : MonoBehaviour
     {
         public int nowStage;
         public int nextStage;
+        public bool isTutorialcheck;
+        public bool isBgmOn;
     }
 
     public SaveData _SaveData;
@@ -65,6 +67,7 @@ public class SaveSystem : MonoBehaviour
             _SaveData = new SaveData();
             saveData.nextStage = 1;
             saveData.nowStage = 0;
+            saveData.isTutorialcheck = false;
         }
     }
 
@@ -79,8 +82,9 @@ public class SaveSystem : MonoBehaviour
         print($"저장 위치 : {filePath}");
         print($"현재 레벨 : {saveData.nowStage}");
         print($"다음 레벨 : {saveData.nextStage}");
+        print($"튜토리얼 스킵? : {saveData.isTutorialcheck}");
     }
-    
+
     private void OnApplicationQuit()
     {
         SaveGameData();
@@ -92,5 +96,16 @@ public class SaveSystem : MonoBehaviour
         {
             SaveGameData();
         }
+    }
+
+    public void DataClear()
+    {
+        saveData.nextStage = 1;
+        saveData.nowStage = 0;
+        saveData.isTutorialcheck = false;
+        saveData.isBgmOn = true;
+        
+        SaveGameData();
+        BGM_Mgr.instance.BgmToggle(saveData.isBgmOn);
     }
 }

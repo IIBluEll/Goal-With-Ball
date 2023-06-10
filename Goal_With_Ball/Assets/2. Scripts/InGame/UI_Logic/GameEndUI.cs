@@ -21,6 +21,9 @@ public class GameEndUI : MonoBehaviour
 
     [SerializeField] private Level_Datas nextlevelDatas;
     [SerializeField] private Level_Datas nowlevelDatas;
+
+    [SerializeField] private AudioClip victoryAudioClip;
+    [SerializeField] private AudioClip loseAudioClip;
     
     private void OnEnable()
     {
@@ -57,11 +60,13 @@ public class GameEndUI : MonoBehaviour
     private void GameVictory()
     {
         victoryUI.SetActive(true);
+        BGM_Mgr.instance.ChangeBgm(victoryAudioClip);
     }
 
     private void GameLose()
     {
         LoseUI.SetActive(true);
+        BGM_Mgr.instance.ChangeBgm(loseAudioClip);
     }
     
     //==========Victory Btn============//

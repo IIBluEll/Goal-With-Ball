@@ -11,21 +11,17 @@ public class Title_Screen : MonoBehaviour
     [SerializeField] private GameObject settingPopUp;
     [SerializeField] private GameObject quitPopUp;
     [SerializeField] private GameObject alarmPopUp;
+
+    [SerializeField] private GameObject shopPopUp;
     
     [SerializeField] private GameObject titleUI;
 
     [SerializeField] private List<GameObject> clearIcon;
 
-    // Debug
-    [SerializeField] private Text debugText;
-
     private void Start()
     {
         var nowlevel = SaveSystem.instance.saveData.nowStage;
         var nextlevel = SaveSystem.instance.saveData.nextStage;
-
-        // Debug
-        debugText.text = $"<Debug> now : {nowlevel} /// next : {nextlevel}";
     }
 
     public void PopDown()
@@ -70,7 +66,18 @@ public class Title_Screen : MonoBehaviour
     {
         titleUI.SetActive(true);
     }
-    
+
+    public void Shop_Btn()
+    {
+        shopPopUp.SetActive(true);
+    }
+
+    public void QuitGameBtn()
+    {
+#if UNITY_ANDROID
+        Application.Quit();
+#endif
+    }
     
     //==========Debug================//
     

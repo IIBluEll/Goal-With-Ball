@@ -29,7 +29,7 @@ public class BallColl_Ctl : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Wall"))
             BallColl?.Invoke();

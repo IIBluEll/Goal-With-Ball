@@ -54,7 +54,16 @@ public class Level_Btn : MonoBehaviour
    private void TempSceneChange()
    {
       //ToDo : 비동기 씬 전환 만들기
-      SceneManager.LoadScene("InGame");
+      StartCoroutine(LoadScene("InGame"));
+   }
+
+   IEnumerator LoadScene(string sceneName)
+   {
+      AsyncOperation asynOper = SceneManager.LoadSceneAsync(sceneName);
+      while (!asynOper.isDone)
+      {
+         yield return null;
+      }
    }
    
    
