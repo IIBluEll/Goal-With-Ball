@@ -1696,10 +1696,12 @@ MonoBehaviour:
   victoryUI: {fileID: 1518738339}
   LoseUI: {fileID: 811032938}
   pauseUI: {fileID: 539145067}
+  nextStageBtn: {fileID: 699030512}
   nextlevelDatas: {fileID: 0}
   nowlevelDatas: {fileID: 0}
   victoryAudioClip: {fileID: 8300000, guid: 91d160b8697c84c2e9ae7c8ee81089cc, type: 3}
   loseAudioClip: {fileID: 8300000, guid: 4f96b76389f444a24b9017be69f5efa7, type: 3}
+  endLevel: 8
 --- !u!1 &277712615
 GameObject:
   m_ObjectHideFlags: 0

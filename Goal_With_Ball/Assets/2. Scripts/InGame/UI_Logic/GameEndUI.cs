@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -19,11 +20,15 @@ public class GameEndUI : MonoBehaviour
     [SerializeField] private GameObject LoseUI;
     [SerializeField] private GameObject pauseUI;
 
+    [SerializeField] private Button nextStageBtn;
+
     [SerializeField] private Level_Datas nextlevelDatas;
     [SerializeField] private Level_Datas nowlevelDatas;
 
     [SerializeField] private AudioClip victoryAudioClip;
     [SerializeField] private AudioClip loseAudioClip;
+
+    [SerializeField] private int endLevel;
     
     private void OnEnable()
     {
@@ -59,6 +64,9 @@ public class GameEndUI : MonoBehaviour
 
     private void GameVictory()
     {
+        if (nowlevelDatas.levelNumber == endLevel)
+            nextStageBtn.interactable = false;
+        
         victoryUI.SetActive(true);
         BGM_Mgr.instance.ChangeBgm(victoryAudioClip);
     }
