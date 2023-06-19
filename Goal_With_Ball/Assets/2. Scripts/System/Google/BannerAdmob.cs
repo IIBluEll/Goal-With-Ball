@@ -7,21 +7,23 @@ using GoogleMobileAds.Api;
 public class BannerAdmob : MonoBehaviour
 {
     private BannerView bannerView;
-
+    
     private void Start()
     {
-        MobileAds.Initialize(initStatus => {});
+#if UNITY_ANDROID
+        //string appId = "ca-app-pub-5066712064975468~5963616733";
+#endif
         
-        this.RequestBanner();
+        MobileAds.Initialize(initStatus => {this.RequestBanner();});
         
-        bannerView.Show();
+       // bannerView.Show();
     }
 
     private void RequestBanner()
     {
         
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-5066712064975468~5963616733";
+        var adUnitId = "ca-app-pub-5066712064975468/4972192598";
 #else
         string adUnitId = "unexpected_platform";        
 #endif
@@ -30,18 +32,18 @@ public class BannerAdmob : MonoBehaviour
         if(this.bannerView != null)
             this.bannerView.Destroy();
         
-        // 적응형 사이즈
-        AdSize adaptiveSize         
-            = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
+       //   적응형 사이즈
+       // AdSize  adaptiveSize         
+       //      = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(AdSize.FullWidth);
 
-        this.bannerView = new BannerView(adUnitId, adaptiveSize, AdPosition.Bottom);
+        this.bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
 
         // 광고 다시 불러오기
-        AdRequest request = new AdRequest.Builder().Build();
+        AdRequest request = new AdRequest.Builder().AddKeyword("unity-admob").Build();
         
         // 배너 불러오기
         this.bannerView.LoadAd(request);
     }
 
-
+   
 }

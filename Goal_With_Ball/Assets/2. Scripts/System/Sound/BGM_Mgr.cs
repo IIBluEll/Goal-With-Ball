@@ -22,7 +22,9 @@ public class BGM_Mgr : MonoBehaviour
 
     private float time = .01f; // 음악 전환 시간
 
-    private void OnEnable()
+    public bool isQuite = true;
+    
+    private void Start()
     {
         if (instance != null)
         {
@@ -40,6 +42,9 @@ public class BGM_Mgr : MonoBehaviour
             { "MainMenu", title_music },
             { "InGame", inGame_music },
         };
+
+        isQuite = SaveSystem.instance.saveData.isBgmOn;
+        backGroundMusic.volume = isQuite ? 1 : 0;
     }
 
 
@@ -68,6 +73,8 @@ public class BGM_Mgr : MonoBehaviour
 
     public void BgmToggle(bool isOn)
     {
+        isQuite = isOn;
+        
         backGroundMusic.volume = isOn ? 1 : 0;
     }
 

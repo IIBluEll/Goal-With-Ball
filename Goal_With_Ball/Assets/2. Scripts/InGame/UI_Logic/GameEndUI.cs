@@ -5,7 +5,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 /// <summary>
 /// 1. 게임이 끝났을 때 승리 또는 패배 UI 관리
 /// 2. 일시정지 시 UI 관리
@@ -69,6 +70,15 @@ public class GameEndUI : MonoBehaviour
         
         victoryUI.SetActive(true);
         BGM_Mgr.instance.ChangeBgm(victoryAudioClip);
+
+        if (nowlevelDatas.levelNumber == 1)
+        {
+            Social.ReportProgress("CgkI2baKsNQcEAIQAQ",100.0f,(bool success)=>{});
+        }
+        else if (nowlevelDatas.levelNumber == 2)
+        {
+            Social.ReportProgress("CgkI2baKsNQcEAIQAg",100.0f,(bool success)=>{});
+        }
     }
 
     private void GameLose()
